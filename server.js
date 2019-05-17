@@ -1,8 +1,11 @@
 const express = require("express");
 const path = require("path");
 
-var app = express();
-var PORT = process.env.PORT || 3000;
+const html = require("./app/routing/htmlRoutes");
+const api = require("./app/routing/apiRoutes");
+
+const app = express();
+const PORT = process.env.PORT || 3000;
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
