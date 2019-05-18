@@ -7,4 +7,5 @@
     html.get("/*", function(request, response) {
         response.sendFile(path.join(__dirname, "../public/home.html"));
     });
+    
     module.exports = html;
