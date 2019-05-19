@@ -25,7 +25,7 @@
             <input type="text" id="photo" class="form-control" required="">
 
             <hr>
-            
+
             <h3><strong>Question 1</strong></h3>
             <h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
             <select class="form-select" id="q1" required>
@@ -164,7 +164,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    
+
     <script>
         $("#submit").on("click", (event) => {
             event.preventDefault();
@@ -173,11 +173,20 @@
                 scores.push(parseInt($("#q" + i).val()));
             }
             var formContent = {
-                name: $("#name"),
-                photo: $("#photo"),
+                name: $("#name").val(),
+                photo: $("#photo").val(),
                 scores: scores
             };
-            $.ajax().then();
+            formString = JSON.stringify(formContent);
+            // console.log(formString);
+            $.ajax({
+                    url: "/api/friends",
+                    method: "POST",
+                    contentType: "application/json",
+                    data: formString
+                }).then((res) => {
+                    console.log(res);
+                });
         });
     </script>
 </body>
