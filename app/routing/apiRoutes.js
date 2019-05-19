@@ -15,7 +15,7 @@ api.post("/friends", function(request, response) {
     // then
     friends.push(newFriend);
     console.log(newFriend);
-    response.json(newFriend);
+    response.json(bestFriend);
     // fs.writeFile(path.join(__dirname, "../data/friends.js"), JSON.stringify(friends), (err) => {
     //     if (err) throw err;
     //     console.log("friends.js updated.");
@@ -24,7 +24,7 @@ api.post("/friends", function(request, response) {
 
 function findFriend(friends, myScores) {
     var theIndex;
-    var leastDiff = 100; // initialize to a high value so comparison is simpler
+    var leastDiff = 100; // initialize to a high value; any comparison will be better...
     for (var i = 0; i < friends.length; i++) {
         var newDiff = totalDiff(friends[i].scores, myScores);
         if (newDiff < leastDiff) {
