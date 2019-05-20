@@ -9,12 +9,12 @@ api.get("/friends", function(request, response) {
 });
 api.post("/friends", function(request, response) {
     var newFriend = request.body;
+    console.log(newFriend);
     var friends = JSON.parse(fs.readFileSync(path.join(__dirname, "../data/friends.js"), "utf-8"));
     // handle the comparison here
     var bestFriend = findFriend(friends, newFriend.scores);
     // then
     friends.push(newFriend);
-    console.log(newFriend);
     response.json(bestFriend);
     // fs.writeFile(path.join(__dirname, "../data/friends.js"), JSON.stringify(friends), (err) => {
     //     if (err) throw err;
@@ -27,6 +27,7 @@ function findFriend(friends, myScores) {
     var leastDiff = 100; // initialize to a high value; any comparison will be better...
     for (var i = 0; i < friends.length; i++) {
         var newDiff = totalDiff(friends[i].scores, myScores);
+        console.log(friends[i].name + ": " + newDiff);
         if (newDiff < leastDiff) {
             leastDiff = newDiff;
             theIndex = i;
@@ -39,6 +40,7 @@ function totalDiff(compare, myScores) {
     var td = 0;
     for (var i = 0; i < compare.length; i++) {
         td += Math.abs(compare[i] - myScores[i]);
+        console.log(Math.abs(compare[i] - myScores[i]));
     }
     return td;
 }
