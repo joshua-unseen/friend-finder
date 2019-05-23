@@ -16,10 +16,10 @@ api.post("/friends", function(request, response) {
     // then
     friends.push(newFriend);
     response.json(bestFriend);
-    // fs.writeFile(path.join(__dirname, "../data/friends.js"), JSON.stringify(friends), (err) => {
-    //     if (err) throw err;
-    //     console.log("friends.js updated.");
-    // });
+    fs.writeFile(path.join(__dirname, "../data/friends.js"), JSON.stringify(friends), (err) => {
+        if (err) throw err;
+        console.log("friends.js updated.");
+    });
 });
 
 function findFriend(friends, myScores) {

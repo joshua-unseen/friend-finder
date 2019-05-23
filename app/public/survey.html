@@ -176,7 +176,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cool!</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="cool">Cool!</button>
                 </div>
             </div>
         </div>
@@ -213,6 +213,9 @@
                 $("#friend-name").text(res.name);
                 $("#new-friend-modal").modal();
             });
+        });
+        $("#cool").click(event => {
+            $("#friend-form").trigger("reset");
         });
         // $("#submit").on("click", (event) => {
         //     event.preventDefault();
