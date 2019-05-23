@@ -1,6 +1,7 @@
 const express = require("express");
-const path = require("path");
+const path = require("path");   // not necessary in this file, I guess.
 
+//The route files
 const html = require("./app/routing/htmlRoutes");
 const api = require("./app/routing/apiRoutes");
 

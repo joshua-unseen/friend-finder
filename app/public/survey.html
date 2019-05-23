@@ -191,8 +191,10 @@
         crossorigin="anonymous"></script>
 
     <script>
+        // $("form").serialize isn't smart enough to handle this, so we've got to roll our own
         $("#friend-form").submit(function (event) {
-            event.preventDefault();
+            event.preventDefault(); // Don't reload the page on submit
+            // Make a useful object out of the form responses
             var formContent = {
                 name: $("input[name^=name]").val().trim(),
                 photo: $("input[name^=photo]").val().trim(),
@@ -200,13 +202,16 @@
                     return parseInt($(this).val());
                 }).get()
             }
+            // Turn the object into a string
             formString = JSON.stringify(formContent);
             // console.log(formString);
+            // Send the string to the friends api
             $.ajax({
                 url: "/api/friends",
                 method: "POST",
                 contentType: "application/json",
                 data: formString
+                // Build the modal with the response
             }).then((res) => {
                 $("#friend-photo").attr("src", res.photo);
                 console.log(res);
@@ -214,32 +219,10 @@
                 $("#new-friend-modal").modal();
             });
         });
+        // Reset the form (I hate an un-reset form...)
         $("#cool").click(event => {
             $("#friend-form").trigger("reset");
         });
-        // $("#submit").on("click", (event) => {
-        //     event.preventDefault();
-        //     var formContent = {
-        //         name: $("#name").val(),
-        //         photo: $("#photo").val(),
-        //         scores: $("select").map(function() {
-        //             return parseInt($(this).val());
-        //         }).get()
-        //     };
-        //     formString = JSON.stringify(formContent);
-        //     // console.log(formString);
-        //     $.ajax({
-        //         url: "/api/friends",
-        //         method: "POST",
-        //         contentType: "application/json",
-        //         data: formString
-        //     }).then((res) => {
-        //         console.log(res);
-        //         $("#friend-photo").attr("src", res.photo);
-        //         $("#friend-name").text(res.name);
-        //         $("#new-friend-modal").modal();
-        //     });
-        // });
     </script>
 </body>
 
