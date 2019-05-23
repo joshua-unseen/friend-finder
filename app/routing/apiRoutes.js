@@ -25,6 +25,7 @@ api.post("/friends", function(request, response) {
 function findFriend(friends, myScores) {
     var theIndex;
     var leastDiff = 100; // initialize to a high value; any comparison will be better...
+    console.log("Total score differences:")
     for (var i = 0; i < friends.length; i++) {
         var newDiff = totalDiff(friends[i].scores, myScores);
         console.log(friends[i].name + ": " + newDiff);
@@ -32,15 +33,15 @@ function findFriend(friends, myScores) {
             leastDiff = newDiff;
             theIndex = i;
         }
-        return friends[theIndex];
     }
+    return friends[theIndex];
 }
 
 function totalDiff(compare, myScores) {
     var td = 0;
     for (var i = 0; i < compare.length; i++) {
         td += Math.abs(compare[i] - myScores[i]);
-        console.log(Math.abs(compare[i] - myScores[i]));
+        // console.log(Math.abs(compare[i] - myScores[i]));
     }
     return td;
 }
