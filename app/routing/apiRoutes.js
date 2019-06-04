@@ -15,13 +15,13 @@ api.post("/friends", function(request, response) {
     var bestFriend = findFriend(friends, newFriend.scores);
     // then add the new person to the array
     friends.push(newFriend);
-    // return the best match
-    response.json(bestFriend);
     // write the array to the file, overwriting the entire file.
     fs.writeFile(path.join(__dirname, "../data/friends.js"), JSON.stringify(friends), (err) => {
         if (err) throw err;
         console.log("friends.js updated.");
     });
+    // return the best match
+    response.json(bestFriend);
 });
 
 // This walks through the friends array and uses the totalDiff() to find the best match.
